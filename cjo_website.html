@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Criminal Justice Outreach – CJO</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --deep: #0a1628;
+    --navy: #0f2241;
+    --gold: #c9a84c;
+    --gold-light: #e8c97a;
+    --cream: #f5f0e8;
+    --cream2: #ede6d6;
+    --text: #1a1a2e;
+    --muted: #5a5a7a;
+    --white: #ffffff;
+    --card-bg: #ffffff;
+    --border: rgba(201,168,76,0.25);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:100;
+    background: rgba(10,22,40,0.96);
+    backdrop-filter: blur(8px);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 4rem; height: 64px;
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .nav-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+  .nav-logo-mark {
+    width:36px; height:36px; border-radius:50%;
+    background: var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display', serif;
+    font-weight:900; font-size:15px; color:var(--deep);
+  }
+  .nav-logo-text { font-family:'Playfair Display',serif; font-size:15px; color:var(--white); letter-spacing:0.08em; }
+  .nav-links { display:flex; gap:2rem; list-style:none; }
+  .nav-links a { font-size:13px; color:rgba(255,255,255,0.7); text-decoration:none; letter-spacing:0.05em; transition:color 0.2s; }
+  .nav-links a:hover { color:var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, var(--deep) 0%, var(--navy) 55%, #1a2f50 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 80px 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content:''; position:absolute; inset:0;
+    background: radial-gradient(ellipse 60% 50% at 50% 40%, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero-crest {
+    width:120px; height:120px; border-radius:50%;
+    border: 3px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    background: rgba(201,168,76,0.1);
+    margin-bottom: 2rem;
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-crest-inner {
+    font-family:'Playfair Display',serif;
+    font-weight:900; font-size:40px; color:var(--gold);
+    letter-spacing:-1px;
+  }
+  .hero h1 {
+    font-family:'Playfair Display',serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color:var(--white); font-weight:900; line-height:1.1;
+    letter-spacing:-0.02em; margin-bottom:0.5rem;
+    animation: fadeUp 0.9s 0.1s ease both;
+  }
+  .hero-sub {
+    font-size:13px; letter-spacing:0.3em; color:var(--gold);
+    text-transform:uppercase; margin-bottom:2.5rem;
+    animation: fadeUp 0.9s 0.2s ease both;
+  }
+  .hero-divider { width:60px; height:2px; background:var(--gold); margin:0 auto 2.5rem; animation: fadeUp 0.9s 0.3s ease both; }
+
+  /* VMO grid */
+  .vmo-grid {
+    display:grid; grid-template-columns: repeat(3,1fr); gap:1.5rem;
+    max-width:900px; width:100%; margin-bottom:3rem;
+    animation: fadeUp 0.9s 0.4s ease both;
+  }
+  .vmo-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius:12px; padding:1.5rem;
+    text-align:left;
+  }
+  .vmo-card-label {
+    font-size:10px; letter-spacing:0.25em; color:var(--gold);
+    text-transform:uppercase; margin-bottom:0.6rem;
+  }
+  .vmo-card p { font-size:13px; color:rgba(255,255,255,0.75); line-height:1.7; }
+
+  /* CREED */
+  .creed-box {
+    max-width:680px; width:100%;
+    background: rgba(201,168,76,0.07);
+    border:1px solid rgba(201,168,76,0.3);
+    border-radius:12px; padding:2rem 2.5rem;
+    animation: fadeUp 0.9s 0.5s ease both;
+  }
+  .creed-label { font-size:10px; letter-spacing:0.25em; color:var(--gold); text-transform:uppercase; margin-bottom:1rem; }
+  .creed-box p { font-family:'Playfair Display',serif; font-style:italic; font-size:14px; color:rgba(255,255,255,0.85); line-height:2; }
+
+  /* SECTIONS common */
+  section { padding: 5rem 2rem; }
+  .container { max-width:1100px; margin:0 auto; }
+  .section-label { font-size:11px; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; margin-bottom:0.8rem; }
+  .section-title {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1.8rem,3.5vw,2.8rem);
+    color:var(--deep); font-weight:700; margin-bottom:1rem;
+  }
+  .section-divider { width:48px; height:2px; background:var(--gold); margin-bottom:2.5rem; }
+
+  /* dark section */
+  .dark-section { background: var(--deep); }
+  .dark-section .section-title { color:var(--white); }
+  .dark-section .section-divider { background:var(--gold); }
+
+  /* PROJECTS */
+  .projects-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; }
+  .project-card {
+    background:var(--white);
+    border-radius:12px;
+    padding:1.75rem;
+    border: 1px solid var(--border);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .project-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.08); }
+  .project-num {
+    font-family:'Playfair Display',serif;
+    font-size:2rem; font-weight:900; color:var(--deep); opacity:0.4;
+    margin-bottom:0.5rem; line-height:1;
+  }
+  .project-card h3 { font-size:15px; font-weight:600; color:var(--deep); margin-bottom:0.6rem; }
+  .project-card p { font-size:13px; color:var(--muted); line-height:1.7; }
+
+  /* SCHEDULE */
+  .schedule-table { width:100%; border-collapse:collapse; }
+  .schedule-table th {
+    font-size:11px; letter-spacing:0.15em; text-transform:uppercase;
+    color:var(--gold); padding:0.75rem 1rem; text-align:left;
+    border-bottom:1px solid rgba(201,168,76,0.3);
+  }
+  .schedule-table td {
+    padding:0.75rem 1rem; font-size:13px; color:rgba(255,255,255,0.8);
+    border-bottom:1px solid rgba(255,255,255,0.05);
+  }
+  .schedule-table tr:hover td { background:rgba(201,168,76,0.05); }
+  .tag {
+    display:inline-block; font-size:10px; padding:3px 9px; border-radius:20px;
+    letter-spacing:0.05em;
+  }
+  .tag-gold { background:rgba(201,168,76,0.15); color:var(--gold); }
+  .tag-blue { background:rgba(66,153,225,0.12); color:#63b3ed; }
+  .tag-green { background:rgba(72,187,120,0.12); color:#68d391; }
+  .tag-red { background:rgba(252,129,74,0.12); color:#fc814a; }
+
+  /* GALLERY */
+  .gallery-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:1rem; }
+  .gallery-item {
+    aspect-ratio:1; border-radius:10px; overflow:hidden;
+    background:var(--cream2);
+    display:flex; align-items:center; justify-content:center;
+    border:1px solid var(--border); position:relative;
+    cursor:pointer;
+  }
+  .gallery-item:hover .gallery-overlay { opacity:1; }
+  .gallery-overlay {
+    position:absolute; inset:0; background:rgba(10,22,40,0.6);
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; transition:opacity 0.2s;
+  }
+  .gallery-overlay span { font-size:11px; color:var(--gold); letter-spacing:0.1em; }
+  .gallery-placeholder { font-size:12px; color:var(--muted); text-align:center; padding:1rem; }
+  .gallery-upload-note {
+    font-size:12px; color:var(--muted); text-align:center;
+    margin-top:1.5rem; font-style:italic;
+  }
+  .upload-area {
+    border:2px dashed var(--border); border-radius:12px;
+    padding:2rem; text-align:center; cursor:pointer;
+    margin-bottom:2rem; transition:border-color 0.2s;
+  }
+  .upload-area:hover { border-color:var(--gold); }
+  .upload-area input { display:none; }
+  .upload-area p { font-size:13px; color:var(--muted); margin-top:0.5rem; }
+
+  /* REPORTS */
+  .reports-list { display:flex; flex-direction:column; gap:1rem; }
+  .report-item {
+    display:flex; align-items:center; justify-content:space-between;
+    background:rgba(255,255,255,0.05); border:1px solid rgba(201,168,76,0.2);
+    border-radius:10px; padding:1rem 1.5rem;
+  }
+  .report-info h4 { font-size:14px; color:var(--white); margin-bottom:3px; }
+  .report-info span { font-size:12px; color:rgba(255,255,255,0.45); }
+  .btn-download {
+    background:var(--gold); color:var(--deep);
+    border:none; border-radius:6px; padding:8px 18px;
+    font-size:12px; font-weight:600; cursor:pointer;
+    letter-spacing:0.05em; transition:background 0.2s;
+    text-decoration:none; display:inline-block;
+  }
+  .btn-download:hover { background:var(--gold-light); }
+
+  /* BLOG */
+  .blog-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:1.5rem; }
+  .blog-card {
+    background:var(--white); border-radius:12px; overflow:hidden;
+    border:1px solid var(--border); transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .blog-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.1); }
+  .blog-thumb {
+    height:160px; background:var(--cream2);
+    display:flex; align-items:center; justify-content:center;
+    font-size:13px; color:var(--muted);
+    border-bottom:1px solid var(--border);
+  }
+  .blog-body { padding:1.25rem; }
+  .blog-tag { font-size:10px; letter-spacing:0.15em; color:var(--gold); text-transform:uppercase; margin-bottom:0.5rem; }
+  .blog-body h3 { font-size:15px; font-weight:600; color:var(--deep); margin-bottom:0.5rem; line-height:1.4; }
+  .blog-body p { font-size:12px; color:var(--muted); line-height:1.7; margin-bottom:1rem; }
+  .blog-meta { font-size:11px; color:rgba(90,90,122,0.7); }
+
+  /* FACILITATORS */
+  .facilitators-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:1.5rem; }
+  .facilitator-card {
+    background:var(--white) ; border-radius:14px;
+    border:1px solid var(--border);
+    padding:1.75rem; text-align:center;
+    transition:transform 0.2s, box-shadow 0.2s;
+  }
+  .facilitator-card:hover { transform:translateY(-4px); box-shadow:0 12px 40px rgba(0,0,0,0.08); }
+  .avatar {
+    width:72px; height:72px; border-radius:50%;
+    background:var(--cream2); border:3px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    margin:0 auto 1rem;
+    font-family:'Playfair Display',serif; font-weight:900;
+    font-size:22px; color:var(--gold);
+    overflow:hidden;
+  }
+  .avatar img { width:100%; height:100%; object-fit:cover; }
+  .facilitator-card h3 { font-size:15px; font-weight:600; color:var(--deep); margin-bottom:3px; }
+  .facilitator-card .role { font-size:12px; color:var(--gold); margin-bottom:0.6rem; }
+  .facilitator-card .bio { font-size:12px; color:var(--muted); line-height:1.7; margin-bottom:1rem; }
+  .social-links { display:flex; justify-content:center; gap:0.75rem; }
+  .social-link {
+    width:30px; height:30px; border-radius:6px;
+    background:var(--cream2); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px; color:var(--muted); text-decoration:none;
+    transition:background 0.2s, color 0.2s;
+  }
+  .social-link:hover { background:var(--gold); color:var(--deep); }
+
+  /* CONVENER */
+  .convener-section { background: var(--deep); }
+  .convener-wrap {
+    display:grid; grid-template-columns: 340px 1fr; gap:4rem; align-items:start;
+  }
+  .convener-photo {
+    aspect-ratio:3/4; border-radius:14px;
+    background:rgba(255,255,255,0.05);
+    border:2px solid rgba(201,168,76,0.3);
+    display:flex; align-items:center; justify-content:center;
+    overflow:hidden;
+  }
+  .convener-photo img { width:100%; height:100%; object-fit:cover; }
+  .convener-photo-placeholder {
+    font-size:13px; color:rgba(255,255,255,0.3); text-align:center; padding:2rem;
+  }
+  .convener-content .section-title { color:var(--white); }
+  .convener-name {
+    font-family:'Playfair Display',serif;
+    font-size:2rem; color:var(--white); font-weight:700; margin-bottom:0.3rem;
+  }
+  .convener-title { font-size:13px; color:var(--gold); letter-spacing:0.1em; margin-bottom:2rem; }
+  .convener-bio { font-size:14px; color:rgba(255,255,255,0.72); line-height:1.85; margin-bottom:2rem; }
+  .convener-social { display:flex; gap:0.75rem; flex-wrap:wrap; }
+  .convener-social a {
+    display:flex; align-items:center; gap:6px;
+    background:rgba(201,168,76,0.1); border:1px solid rgba(201,168,76,0.25);
+    border-radius:8px; padding:8px 14px;
+    font-size:12px; color:var(--gold); text-decoration:none;
+    transition:background 0.2s;
+  }
+  .convener-social a:hover { background:rgba(201,168,76,0.2); }
+
+  /* FOOTER */
+  footer {
+    background:#060e1c;
+    padding:3rem 2rem;
+    text-align:center;
+    border-top:1px solid rgba(201,168,76,0.15);
+  }
+  footer p { font-size:12px; color:rgba(255,255,255,0.3); line-height:2; }
+  footer .footer-logo { font-family:'Playfair Display',serif; font-size:18px; color:var(--gold); margin-bottom:0.5rem; }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(24px); }
+    to { opacity:1; transform:translateY(0); }
+  }
+
+  @media (max-width:768px) {
+    nav { padding:0 1.5rem; }
+    .nav-links { display:none; }
+    .vmo-grid { grid-template-columns:1fr; }
+    .convener-wrap { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#">
+    <div class="nav-logo-mark">CJO</div>
+    <span class="nav-logo-text">Criminal Justice Outreach</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#awareness">Awareness</a></li>
+    <!--
+    <li><a href="#reports">Reports</a></li>
+  -->
+    <li><a href="#blog">Blog</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#convener">Convener</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-crest">
+    <span class="hero-crest-inner">CJO</span>
+  </div>
+  <p class="hero-sub">Criminal Justice Outreach</p>
+  <h1>Where Law<br/>Meets Life</h1>
+  <div class="hero-divider"></div>
+
+  <div class="vmo-grid">
+    <div class="vmo-card">
+      <p class="vmo-card-label">Vision</p>
+      <p>To build safer, just, and thriving communities through Criminological innovation.</p>
+    </div>
+    <div class="vmo-card">
+      <p class="vmo-card-label">Mission</p>
+      <p>Advancing justice through criminological innovation, education, and solution-oriented initiatives.</p>
+    </div>
+    <div class="vmo-card">
+      <p class="vmo-card-label">Core Objectives</p>
+      <p>Individual intentionality · Community Policing · Restorative Justice · Criminological Application · Leadership · Victim Support</p>
+    </div>
+  </div>
+
+  <div class="creed-box">
+    <p class="creed-label">The CJO Creed</p>
+    <p>
+      We stand where law meets life,<br/>
+      Where justice must be more than strife.<br/>
+      Through Criminology's clear sight,<br/>
+      We study crime to bring the light.<br/>
+      With science, mind, and penology's care,<br/>
+      We seek to mend and make things fair.<br/>
+      For every voice, for every case,<br/>
+      We build a system fit for place.
+    </p>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label">Our Programmes</p>
+    <h2 class="section-title">Project Phases</h2>
+    <div class="section-divider"></div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-num">01</div>
+        <h3>Case Lab Project</h3>
+        <p>A biweekly analytical platform where criminological cases are dissected, studied, and used to sharpen participants' skills in justice application and policy thinking.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-num">02</div>
+        <h3>Bail & Restorative Support</h3>
+        <p>Providing structured assistance for bail processes while championing restorative justice frameworks that repair harm, rebuild relationships, and reintegrate offenders.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-num">03</div>
+        <h3>Awareness on Sex Weaponization</h3>
+        <p>An educational initiative tackling the exploitation and weaponization of sex in criminal contexts — raising awareness, sensitizing communities, and equipping individuals.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-num">04</div>
+        <h3>Family Reorientation for Youth</h3>
+        <p>Engaging families as the first layer of crime prevention by reorienting family dynamics, improving communication, and reducing risk factors for youth offending.</p>
+      </div>
+      <div class="project-card">
+        <div class="project-num">05</div>
+        <h3>Juvenile Delinquency Support</h3>
+        <p>A targeted support system for at-risk youth and juvenile offenders — combining counselling, mentorship, legal awareness, and community engagement for positive outcomes.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCHEDULE -->
+<section id="schedule" class="dark-section">
+  <div class="container">
+    <p class="section-label" style="color:var(--gold)">Programme Calendar</p>
+    <h2 class="section-title">Upcoming Activities</h2>
+    <div class="section-divider"></div>
+    <table class="schedule-table">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Activity</th>
+          <th>Type</th>
+          <th>Venue / Mode</th>
+        </tr>
+      </thead>
+      <tbody id="schedule-body">
+        <tr>
+          <td>May 20, 2025</td>
+          <td>Biweekly Case Lab Session – Session 1</td>
+          <td><span class="tag tag-gold">Case Lab</span></td>
+          <td>Online / TBC</td>
+        </tr>
+        <tr>
+          <td>June 3, 2025</td>
+          <td>Biweekly Case Lab Session – Session 2</td>
+          <td><span class="tag tag-gold">Case Lab</span></td>
+          <td>Online / TBC</td>
+        </tr>
+        <tr>
+          <td>June 14, 2025</td>
+          <td>CJO Colloquium</td>
+          <td><span class="tag tag-blue">Colloquium</span></td>
+          <td>Hall / TBC</td>
+        </tr>
+        <tr>
+          <td>June 17, 2025</td>
+          <td>Biweekly Case Lab Session – Session 3</td>
+          <td><span class="tag tag-gold">Case Lab</span></td>
+          <td>Online / TBC</td>
+        </tr>
+        <tr>
+          <td>June 28, 2025</td>
+          <td>CJO Team Hangout</td>
+          <td><span class="tag tag-green">Team</span></td>
+          <td>TBC</td>
+        </tr>
+        <tr>
+          <td>July 1, 2025</td>
+          <td>Biweekly Case Lab Session – Session 4</td>
+          <td><span class="tag tag-gold">Case Lab</span></td>
+          <td>Online / TBC</td>
+        </tr>
+        <tr>
+          <td>July 10, 2025</td>
+          <td>Community / Facility Visitation</td>
+          <td><span class="tag tag-red">Visitation</span></td>
+          <td>Field</td>
+        </tr>
+        <tr>
+          <td>July 15, 2025</td>
+          <td>Biweekly Case Lab Session – Session 5</td>
+          <td><span class="tag tag-gold">Case Lab</span></td>
+          <td>Online / TBC</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px; color:rgba(255,255,255,0.3); margin-top:1.5rem; font-style:italic;">* Dates subject to change. Check back for updates.</p>
+  </div>
+</section>
+
+<!-- 19-DAY AWARENESS GALLERY -->
+<section id="awareness">
+  <div class="container">
+    <p class="section-label">Visual Record</p>
+    <h2 class="section-title">19 Days CJO Awareness</h2>
+    <div class="section-divider"></div>
+    <style>
+  #awareness-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+
+    
+  }
+  img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+    opacity: 0.8;
+     transition: opacity 0.3s ease;
+  }
+  img:hover, .specific-day:hover {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  .gallery-item {
+    position: relative;
+    border: 1px solid rgba(201,168,76,0.25);  
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--cream2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+  .specific-day {
+    position: absolute;
+    bottom: 50%;
+    top: 50%;
+    font-family: sans-serif;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 12px;
+    color: var(--gold);
+    background: rgba(10,22,40,0.6);
+    padding: 4px 8px;
+  }    
+ 
+    </style>
+    <div id="awareness-gallery">
+      <div class="gallery-item">
+        <img src="CJO IMAGES/Day 1.png" alt="" id="day1" height="300" width="240" stroke="currentColor">
+        <div class="specific-day">Day 1</div>
+
+      </div>
+      <div class="gallery-item">
+        <img src="CJO IMAGES/Day 2.png" alt="" id="day2" height="300" width="240" stroke="currentColor">
+        <div class="specific-day">Day 2</div>
+      </div>
+         <div class="gallery-item">
+        <img src="CJO IMAGES/Day 3.png" alt="" id="day3" height="300" width="240" stroke="currentColor">
+        <div class="specific-day">Day 3</div>
+      </div>
+         <div class="gallery-item">
+        <img src="CJO IMAGES/Day 4.png" alt="" id="day4" height="300" width="240" stroke="currentColor">
+        <div class="specific-day">Day 4</div>
+      </div>
+          <div class="gallery-item">
+          <img src="CJO IMAGES/Day 5.png" alt="" id="day5" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 5</div>
+          </div>
+          <div class="gallery-item">  
+          <img src="CJO IMAGES/Day 6.png" alt="" id="day6" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 6</div>
+          </div>
+          <div class="gallery-item">
+          <img src="CJO IMAGES/Day 7.png" alt="" id="day7" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 7</div>
+          </div>
+          <div class="gallery-item">
+          <img src="CJO IMAGES/Day 8.png" alt="" id="day8" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 8</div>
+          </div>
+          <div class="gallery-item">
+          <img src="CJO IMAGES/Day 9.png" alt="" id="day9" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 9</div>
+          </div>
+          <div class="gallery-item">
+          <img src="CJO IMAGES/Day 10.png" alt="" id="day10" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 10</div>
+          </div>
+          <div class="gallery-item">
+          <img src="CJO IMAGES/Day 11.png" alt="" id="day11" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 11</div>
+          </div>
+          <div class="gallery-item">
+          <img src="CJO IMAGES/Day 12.png" alt="" id="day12" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 12</div>
+          </div>
+          <div class="gallery-item">
+          <img src="CJO IMAGES/Day 13.png" alt="" id="day13" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 13</div>
+          </div>
+          <div class="gallery-item">
+          <img src="CJO IMAGES/Day 14.png" alt="" id="day14" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 14</div>
+          </div>
+          <div class="gallery-item">
+          <img src="CJO IMAGES/Day 15.png" alt="" id="day15" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 15</div>
+          </div>
+          <div class="gallery-item">
+          <img src="CJO IMAGES/Day 16.png" alt="" id="day16" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 16</div>
+          </div>
+          <div class="gallery-item">
+          <img src="CJO IMAGES/Day 17.png" alt="" id="day17" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 17</div>
+          </div>
+          <div class="gallery-item">
+          <img src="CJO IMAGES/Day 18.png" alt="" id="day18" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 18</div>
+          </div>
+          <div class="gallery-item">
+          <img src="CJO IMAGES/Day 19.png" alt="" id="day19" height="300" width="240" stroke="currentColor">
+          <div class="specific-day">Day 19</div>
+        </div>      
+
+      </div>
+      
+    </div>
+
+    <!--
+
+    <label class="upload-area" id="awareness-upload-area">
+      <input type="file" id="awareness-files" multiple accept="image/*"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="90" height="90" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color:var(--gold); margin-bottom:8px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <p>Click to upload awareness photos</p>
+      <p style="font-size:11px; margin-top:4px;">JPG, PNG — multiple files supported</p>
+    </label>
+
+    <div class="gallery-grid" id="awareness-gallery">
+     Day placeholders -->
+       <!--
+      <script>
+        document.addEventListener('DOMContentLoaded',()=>{
+          const grid = document.getElementById('awareness-gallery');
+          for(let i=1;i<=19;i++){
+            grid.innerHTML += `<div class="gallery-item" id="awareness-day-${i}">
+              <div class="gallery-placeholder">
+                <div style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold);opacity:0.4;font-weight:900;">D${i}</div>
+                <div style="margin-top:4px">Day ${i}</div>
+              </div>
+              <div class="gallery-overlay"><span>Day ${i}</span></div>
+            </div>`;
+          }
+          document.getElementById('awareness-files').addEventListener('change',function(e){
+            const files = Array.from(e.target.files);
+            files.forEach((f,idx)=>{
+              if(idx>=19) return;
+              const cell = document.getElementById(`awareness-day-${idx+1}`);
+              const reader = new FileReader();
+              reader.onload = ev => {
+                cell.innerHTML = `<img src="${ev.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"/><div class="gallery-overlay"><span>Day ${idx+1}</span></div>`;
+              };
+              reader.readAsDataURL(f);
+            });
+          });
+        });
+      </script>
+    </div>
+    <p class="gallery-upload-note">Upload your awareness photos above to populate each day's slot.</p>
+  </div>
+-->
+</section>
+
+<!-- REPORTS -->
+ <!---
+ <section id="reports" class="dark-section">
+  <div class="container">
+    <p class="section-label" style="color:var(--gold)">Resources</p>
+    <h2 class="section-title">Case Lab Session Reports</h2>
+    <div class="section-divider"></div>
+    <div class="reports-list">
+      <div class="report-item">
+        <div class="report-info">
+          <h4>Case Lab Session 1 — Biweekly Report</h4>
+          <span>May 20, 2025 · PDF</span>
+        </div>
+        <a class="btn-download" href="#" onclick="alert('Upload the report PDF to enable download.'); return false;">Download ↓</a>
+      </div>
+      <div class="report-item">
+        <div class="report-info">
+          <h4>Case Lab Session 2 — Biweekly Report</h4>
+          <span>June 3, 2025 · PDF</span>
+        </div>
+        <a class="btn-download" href="#" onclick="alert('Upload the report PDF to enable download.'); return false;">Download ↓</a>
+      </div>
+      <div class="report-item">
+        <div class="report-info">
+          <h4>Case Lab Session 3 — Biweekly Report</h4>
+          <span>June 17, 2025 · PDF</span>
+        </div>
+        <a class="btn-download" href="#" onclick="alert('Upload the report PDF to enable download.'); return false;">Download ↓</a>
+      </div>
+    </div>
+    <p style="font-size:12px; color:rgba(255,255,255,0.3); margin-top:1.5rem;">
+      New reports are uploaded after each biweekly session. Contact the CJO team to submit or request a specific report.
+    </p>
+  </div>
+</section>
+ --> <!--I comment out the report section here-->
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="container">
+    <p class="section-label">Insights & Updates</p>
+    <h2 class="section-title">CJO Blog</h2>
+    <div class="section-divider"></div>
+    <div class="blog-grid">
+      <div class="blog-card">
+        <div class="blog-thumb">
+          <span style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase;">Featured Image</span>
+        </div>
+        <div class="blog-body">
+          <p class="blog-tag">Restorative Justice</p>
+          <h3>Why Community-Centred Justice Outcomes Work Better</h3>
+          <p>An exploration of how restorative practices can transform the criminal justice pipeline from punitive to rehabilitative.</p>
+          <span class="blog-meta">CJO Editorial · May 2025</span>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-thumb">
+          <span style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase;">Featured Image</span>
+        </div>
+        <div class="blog-body">
+          <p class="blog-tag">Juvenile Delinquency</p>
+          <h3>The Family as the First Unit of Crime Prevention</h3>
+          <p>Examining the pivotal role family structures play in shaping youth behaviour and reducing delinquency risk.</p>
+          <span class="blog-meta">CJO Research · May 2025</span>
+        </div>
+      </div>
+      <div class="blog-card">
+        <div class="blog-thumb">
+          <span style="font-size:11px; letter-spacing:0.1em; text-transform:uppercase;">Featured Image</span>
+        </div>
+        <div class="blog-body">
+          <p class="blog-tag">Criminological Innovation</p>
+          <h3>Case Lab: Learning Justice from Real-World Cases</h3>
+          <p>Inside the CJO Case Lab — how biweekly sessions are building a new generation of justice-oriented thinkers.</p>
+          <span class="blog-meta">CJO Field Report · June 2025</span>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:13px; color:var(--muted); margin-top:2rem; font-style:italic;">
+      More articles coming soon. Contributors and facilitators are encouraged to submit insights for publication.
+    </p>
+  </div>
+</section>
+
+<!-- TEAM / FACILITATORS -->
+<section id="team">
+  <div class="container">
+    <p class="section-label">The People</p>
+    <h2 class="section-title">Our Facilitators</h2>
+    <div class="section-divider"></div>
+    <div class="facilitators-grid">
+
+      <!-- Facilitator Card Template — duplicate and fill in as needed -->
+      <div class="facilitator-card" style="background-image: linear-gradient(to bottom var(--cream) var(--navy));">
+        <div class="avatar" id="fac1-avatar"><img src="CJO IMAGES/Barr. Rifkatu Ali.jpg" alt="" class="facilitator"></div>
+        <h3>Rifkatu Ali Esq</h3>
+        <p class="role">Role / Specialisation</p>
+        <p class="bio">Brief bio of the facilitator highlighting their background, expertise, and contribution to the CJO mission.</p>
+        <div class="social-links">
+          <a class="social-link" href="https://x.com/AliRifkatu" title="Twitter/X">𝕏</a>
+          <a class="social-link" href="https://www.linkedin.com/in/rifkatu-ali-3a89b0206" title="LinkedIn">in</a>
+          <!--<a class="social-link" href="#" title="Instagram">ig</a>-->
+        </div>
+      </div>
+
+      <div class="facilitator-card">
+        <div class="avatar" id="fac2-avatar"><img src="CJO IMAGES/Mr. Abdurahmon.jpg" alt="" class="facilitator"></div>
+        <h3>Abdulrahmon Mumin</h3>
+        <p class="role">Role / Specialisation</p>
+        <p class="bio">Brief bio of the facilitator highlighting their background, expertise, and contribution to the CJO mission.</p>
+        <div class="social-links">
+          <a class="social-link" href="https://x.com/tcs_hub" title="Twitter/X">𝕏</a>
+          <!--
+          <a class="social-link" href="#" title="LinkedIn">in</a>
+          <a class="social-link" href="#" title="Instagram">ig</a>
+          -->
+        </div>
+      </div>
+
+      <div class="facilitator-card">
+        <div class="avatar" id="fac3-avatar"><img src="CJO IMAGES/Mr. Phinehas.jpg" alt="" class="facilitator"></div>
+        <h3>Mr Phinehas</h3>
+        <p class="role">Role / Specialisation</p>
+        <p class="bio">Brief bio of the facilitator highlighting their background, expertise, and contribution to the CJO mission.</p>
+        <div class="social-links">
+          <a class="social-link" href="#" title="Twitter/X">𝕏</a>
+          <a class="social-link" href="#" title="LinkedIn">in</a>
+          <a class="social-link" href="#" title="Instagram">ig</a>
+        </div>
+      </div>
+
+      <div class="facilitator-card">
+        <div class="avatar" id="fac4-avatar"><img src="CJO IMAGES/Miss. Asanawa Ghide.jpg" alt="" class="facilitator"></div>
+        <h3>Sen. Asanawa Ghide Kalava</h3>
+        <p class="role">Role / Specialisation</p>
+        <p class="bio">Brief bio of the facilitator highlighting their background, expertise, and contribution to the CJO mission.</p>
+        <div class="social-links">
+          <!--<a class="social-link" href="#" title="Twitter/X">𝕏</a>-->
+          <a class="social-link" href="https://www.linkedin.com/in/asanawa-ghide-sal-5a280b20a" title="LinkedIn">in</a>
+          <!--<a class="social-link" href="#" title="Instagram">ig</a>-->
+        </div>
+      </div>
+      
+      <div class="facilitator-card">
+        <div class="avatar" id="fac4-avatar"><img src="CJO IMAGES/Barr. Habeeb.jpeg" alt="" class="facilitator"></div>
+        <h3>Habeeb Olayinka Lawal</h3>
+        <p class="role">Role / Specialisation</p>
+        <p class="bio">Brief bio of the facilitator highlighting their background, expertise, and contribution to the CJO mission.</p>
+        <div class="social-links">
+          <a class="social-link" href="#" title="Twitter/X">𝕏</a>
+          <a class="social-link" href="#" title="LinkedIn">in</a>
+          <a class="social-link" href="#" title="Instagram">ig</a>
+        </div>
+      </div>
+      
+      <div class="facilitator-card">
+        <div class="avatar" id="fac4-avatar"><img src="CJO IMAGES/Miss. Annastacia.jpg" alt="" class="facilitator"></div>
+        <h3>Anastacia Warueno Kiragu</h3>
+        <p class="role">Role / Specialisation</p>
+        <p class="bio">Brief bio of the facilitator highlighting their background, expertise, and contribution to the CJO mission.</p>
+        <div class="social-links">
+          <a class="social-link" href="#" title="Twitter/X">𝕏</a>
+          <a class="social-link" href="#" title="LinkedIn">in</a>
+          <a class="social-link" href="#" title="Instagram">ig</a>
+        </div>
+      </div>
+      
+      <div class="facilitator-card">
+        <div class="avatar" id="fac4-avatar"><img src="CJO IMAGES/Mr. Tony.jpg" alt="" class="facilitator"></div>
+        <h3>Demebide Master Tony</h3>
+        <p class="role">Role / Specialisation</p>
+        <p class="bio">Brief bio of the facilitator highlighting their background, expertise, and contribution to the CJO mission.</p>
+        <div class="social-links">
+          <a class="social-link" href="#" title="Twitter/X">𝕏</a>
+          <a class="social-link" href="#" title="LinkedIn">in</a>
+          <a class="social-link" href="#" title="Instagram">ig</a>
+        </div>
+      </div>
+
+    </div>
+  
+
+    <!-- Photo upload for facilitators -->
+    <div style="margin-top:2.5rem; padding:1.5rem; background:linear-gradient (to bottom var(--cream) var(--navy)); border-radius:12px; border:1px dashed var(--border);">
+     <!--
+      <p style="font-size:13px; color:var(--muted); margin-bottom:1rem;">Upload facilitator profile photos (up to 4):</p>
+      <input type="file" id="fac-upload" multiple accept="image/*" style="font-size:13px; color:var(--muted);"/>
+    </div>
+      --> 
+    <script>
+      document.getElementById('fac-upload').addEventListener('change',function(e){
+        const files = Array.from(e.target.files);
+        files.forEach((f,i)=>{
+          const el = document.getElementById(`fac${i+1}-avatar`);
+          if(!el) return;
+          const r = new FileReader();
+          r.onload = ev => { el.innerHTML = `<img src="${ev.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;"/>` };
+          r.readAsDataURL(f);
+        });
+      });
+    </script>
+  </div>
+ 
+
+</section>
+
+<!-- ALBUM -->
+ <section id="album" style="background:var(--deep)">
+  <div class="container">
+    <p class="section-label" style="color:var(--gold)">Visual Archive</p>
+    <h2 class="section-title" style="color:var(--white)">Project Album</h2>
+    <div class="section-divider"></div>
+  </div>
+  <!--
+  <div id="image-gallery">
+    <div  id="gallery">
+      <img class="gallery-img" id="img_1" src="" alt="">
+      <img class="gallery-img" src="" alt="">
+      <img class="gallery-img" src="" alt="">
+      <img class="gallery-img" src="" alt="">
+    </div>
+
+  </div>
+   <script>
+    const img_array = [
+      "CJO IMAGES/Day 1.png",
+      "CJO IMAGES/Day 2.png",
+      "CJO IMAGES/Day 3.png",
+      "CJO IMAGES/Day 4.png"
+    ]; 
+    
+  </script>
+  -->
+  <div class="gallery-header">
+    <h2 class="gallery-title">CJO VISITS</h2>
+    <button class="gallery-toggle" id="galleryToggle" aria-expanded="false">
+      <span class="toggle-label">Show all</span>
+      <svg class="toggle-icon" width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M2 4.5L7 9.5L12 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+<style>
+  .gallery-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  .gallery-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .gallery-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0;
+    color: var(--gold);
+  }
+
+  .gallery-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: 1px solid #d0d0d0;
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--gold);
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .gallery-toggle:hover {
+    background: #f5f5f5;
+    border-color: #b0b0b0;
+    color: var(--text);
+  }
+
+  .gallery-toggle:focus-visible {
+    outline: 2px solid #4a90d9;
+    outline-offset: 2px;
+  }
+
+  .toggle-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-toggle[aria-expanded="true"] .toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .gallery-toggle[aria-expanded="true"] .toggle-label::after {
+    content: "";
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .gallery-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #eee;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: galleryFadeIn 0.4s ease forwards;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+    border-radius: 2px;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.06);
+  }
+
+  .gallery-item.hidden-item {
+    display: none;
+  }
+
+  @keyframes galleryFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .gallery-title {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-item,
+    .toggle-icon,
+    .gallery-item img {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // ---------------------------------------------------------------
+  // 1) Put your images in a folder (e.g. /images/gallery/) and list
+  //    their paths here. You can also add an optional "alt" text.
+  // ---------------------------------------------------------------
+  const galleryImages = [
+     { src: "CJO IMAGES/Gallery Images/CJO Convener as Delegate.jpg", alt: "Description 1" },
+     { src: "CJO IMAGES/Gallery Images/CJO Convener at Roslan Symposium.jpg", alt: "Description 2" },
+     { src: "CJO IMAGES/Gallery Images/CJO Convener with Fellow.jpg", alt: "Description 3" },
+     { src: "CJO IMAGES/Gallery Images/CJO Convener with Precious.jpg", alt: "Description 4" },
+     { src: "CJO IMAGES/Gallery Images/CJO Visit Oke-Kura.jpg", alt: "Description 5" },
+     { src: "CJO IMAGES/Gallery Images/Picture with Correction Officer.jpg", alt: "Description 6" },
+    // ... add as many as you like
+  ];
+
+  const INITIAL_COUNT = 4;
+
+  const grid = document.getElementById("galleryGrid");
+  const toggleBtn = document.getElementById("galleryToggle");
+  const toggleLabel = toggleBtn.querySelector(".toggle-label");
+
+  function renderGallery() {
+    grid.innerHTML = "";
+
+    galleryImages.forEach((image, index) => {
+      const item = document.createElement("div");
+      item.className = "gallery-item";
+      item.style.animationDelay = `${(index % INITIAL_COUNT) * 0.05}s`;
+
+      if (index >= INITIAL_COUNT) {
+        item.classList.add("hidden-item");
+      }
+
+      const img = document.createElement("img");
+      img.src = image.src;
+      img.alt = image.alt || "";
+      img.loading = "lazy";
+
+      item.appendChild(img);
+      grid.appendChild(item);
+    });
+
+    // Hide the toggle button entirely if there's nothing extra to show
+    toggleBtn.style.display = galleryImages.length > INITIAL_COUNT ? "flex" : "none";
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    const expanded = toggleBtn.getAttribute("aria-expanded") === "true";
+    const hiddenItems = grid.querySelectorAll(".hidden-item");
+
+    if (!expanded) {
+      hiddenItems.forEach((item, i) => {
+        item.classList.remove("hidden-item");
+        item.style.animationDelay = `${i * 0.05}s`;
+        item.style.animation = "none";
+        item.offsetHeight; // reflow to restart animation
+        item.style.animation = "";
+      });
+      toggleLabel.textContent = "Show less";
+      toggleBtn.setAttribute("aria-expanded", "true");
+    } else {
+      grid.querySelectorAll(".gallery-item").forEach((item, i) => {
+        if (i >= INITIAL_COUNT) item.classList.add("hidden-item");
+      });
+      toggleLabel.textContent = "Show all";
+      toggleBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  renderGallery();
+</script> 
+
+ </section>
+
+<!--
+<section id="album" style="background:var(--deep)">
+  <div class="container">
+    <p class="section-label" style="color:var(--gold)">Visual Archive</p>
+    <h2 class="section-title" style="color:var(--white)">Project Album</h2>
+    <div class="section-divider"></div>
+
+    <label class="upload-area" id="album-upload-area" style="border-color:rgba(201,168,76,0.3)">
+      <input type="file" id="album-files" multiple accept="image/*"/>
+      <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" style="color:var(--gold); margin-bottom:8px"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      <p style="color:rgba(255,255,255,0.5);">Click to upload project photos</p>
+    </label>
+
+    <div class="gallery-grid" id="album-gallery">
+      <div class="gallery-item"><div class="gallery-placeholder">Add project photos above</div></div>
+    </div>
+
+    <script>
+      document.getElementById('album-files').addEventListener('change',function(e){
+        const gallery = document.getElementById('album-gallery');
+        gallery.innerHTML = '';
+        Array.from(e.target.files).forEach((f,i)=>{
+          const r = new FileReader();
+          r.onload = ev => {
+            gallery.innerHTML += `<div class="gallery-item"><img src="${ev.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:10px;"/><div class="gallery-overlay"><span>Photo ${i+1}</span></div></div>`;
+          };
+          r.readAsDataURL(f);
+        });
+      });
+    </script>
+  </div>
+</section>
+-->
+
+<!-- CONVENER -->
+<section id="convener" class="convener-section">
+  <div class="container">
+    <div class="convener-wrap">
+      <div>
+        <div class="convener-photo" id="convener-photo-frame">
+          <div class="convener-photo-placeholder">
+            <img src="CJO IMAGES/Gallery Images/THA.jpg " alt=""  width="48" height="48" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 24 24" style="color:rgba(255,255,255,0.2); margin-bottom:1px">
+            
+          </div>
+        </div>
+         <!--
+        <label style="display:block; margin-top:1rem; text-align:center; cursor:pointer;">
+          <input type="file" accept="image/*" id="convener-upload" style="display:none;"/>
+          <span style="font-size:12px; color:var(--gold); border:1px solid rgba(201,168,76,0.3); padding:8px 18px; border-radius:6px;">Upload Photo</span>
+        </label>
+       
+         <script>
+          document.getElementById('convener-upload').addEventListener('change',function(e){
+            const f = e.target.files[0]; if(!f) return;
+            const r = new FileReader();
+            r.onload = ev => {
+              document.getElementById('convener-photo-frame').innerHTML = `<img src="${ev.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:12px;"/>`;
+            };
+            r.readAsDataURL(f);
+          });
+        </script>
+        -->
+       
+      </div>
+
+      <div class="convener-content">
+        <p class="section-label" style="color:var(--gold)">Leadership</p>
+        <p class="convener-name">Hamid Alao</p>
+        <p class="convener-title">Hamid Alao, Criminal Justice Outreach (CJO)</p>
+        <p class="convener-bio">
+          Abdulhamid Adejumo Dhikrullah is an emerging leader and strategist from Osun State with a background in Criminology and Security Studies, an HSE practitioner, and a passionate advocate for leadership development and wellness.
+
+His leadership journey reflects a consistent commitment to institutional growth, innovation, and inclusive impact. From championing the inclusion of the first female members of the Students' Representative Assembly (SRA) at the Federal University Dutse, to serving as the pioneer Coordinator of the Junior Chamber International Nigeria (JCIN), Federal University Dutse Local Organization, and contributing to transformational initiatives as the 2024 Auditor General of the National Association of Kwara, Kogi, and Six South-West States' Students (NAKOLES), he has continually demonstrated visionary leadership by building systems, empowering people, and driving meaningful change.
+
+As the Convener of the Criminal Justice Outreach (CJO), Abdulhamid led a four-month public awareness campaign focused on often-overlooked drivers of crime and social instability. Through the Case Lab Series, he examined the long-term effects of adverse childhood experiences, social stigmatization of reformed offenders, psychosocial hazards, and family instability. His advocacy promotes a more preventive, rehabilitative, and community-centered criminal justice system, encouraging collective responsibility for strengthening families, fostering social inclusion, reducing recidivism, and advancing sustainable societal development.
+
+He is an Associate Member of the Chartered Institute of Logistics and Supply Chain Management (AMCILSM), an Associate Member of the Chartered Institute of Environmental, Health and Safety (AMCIEHS), an Associate Member of the Electoral College Nigeria (ECN), and a Member of the Institute of Safety Professionals of Nigeria (ISPON).
+
+Driven by the conviction that lasting change begins with informed leadership and shared responsibility, Abdulhamid remains committed to advancing safety, security, leadership, and sustainable community development through evidence-based advocacy, continuous learning, and purposeful service.
+
+        </p>
+        <div class="convener-social">
+          <a href="hhtp://x.com/TheHamidAlao">𝕏 Twitter / X</a>
+          <!--<a href="#">in LinkedIn</a>-->
+          <a href=" https://www.instagram.com/cjoutreach?igsh=MW1wMHJsenUwc2Nieg==
+">ig Instagram</a>
+          <!--
+          <a href="#">fb Facebook</a>
+          <a href="#">✉ Email</a>
+          -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-logo">CJO</p>
+  <p>Criminal Justice Outreach · Advancing Justice Through Criminological Innovation</p>
+  <p style="margin-top:0.5rem;">© 2025 Criminal Justice Outreach. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

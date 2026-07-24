@@ -1,0 +1,215 @@
+<!-- ===================== GALLERY SECTION ===================== -->
+<!-- Drop this section into your page. Put your images in a folder,
+     e.g. /images/gallery/, then list their paths in the
+     `galleryImages` array in the <script> below. -->
+
+<section class="gallery-section">
+  <div class="gallery-header">
+    <h2 class="gallery-title">Gallery</h2>
+    <button class="gallery-toggle" id="galleryToggle" aria-expanded="false">
+      <span class="toggle-label">Show all</span>
+      <svg class="toggle-icon" width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M2 4.5L7 9.5L12 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="gallery-grid" id="galleryGrid"></div>
+</section>
+
+<style>
+  .gallery-section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  }
+
+  .gallery-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+  }
+
+  .gallery-title {
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0;
+    color: #1a1a1a;
+  }
+
+  .gallery-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: none;
+    border: 1px solid #d0d0d0;
+    border-radius: 999px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .gallery-toggle:hover {
+    background: #f5f5f5;
+    border-color: #b0b0b0;
+  }
+
+  .gallery-toggle:focus-visible {
+    outline: 2px solid #4a90d9;
+    outline-offset: 2px;
+  }
+
+  .toggle-icon {
+    transition: transform 0.3s ease;
+  }
+
+  .gallery-toggle[aria-expanded="true"] .toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .gallery-toggle[aria-expanded="true"] .toggle-label::after {
+    content: "";
+  }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .gallery-item {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #eee;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: galleryFadeIn 0.4s ease forwards;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.35s ease;
+  }
+
+  .gallery-item:hover img {
+    transform: scale(1.06);
+  }
+
+  .gallery-item.hidden-item {
+    display: none;
+  }
+
+  @keyframes galleryFadeIn {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 900px) {
+    .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .gallery-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+    .gallery-title {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-item,
+    .toggle-icon,
+    .gallery-item img {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // ---------------------------------------------------------------
+  // 1) Put your images in a folder (e.g. /images/gallery/) and list
+  //    their paths here. You can also add an optional "alt" text.
+  // ---------------------------------------------------------------
+  const galleryImages = [
+    // { src: "images/gallery/photo1.jpg", alt: "Description 1" },
+    // { src: "images/gallery/photo2.jpg", alt: "Description 2" },
+    // { src: "images/gallery/photo3.jpg", alt: "Description 3" },
+    // { src: "images/gallery/photo4.jpg", alt: "Description 4" },
+    // { src: "images/gallery/photo5.jpg", alt: "Description 5" },
+    // ... add as many as you like
+  ];
+
+  const INITIAL_COUNT = 4;
+
+  const grid = document.getElementById("galleryGrid");
+  const toggleBtn = document.getElementById("galleryToggle");
+  const toggleLabel = toggleBtn.querySelector(".toggle-label");
+
+  function renderGallery() {
+    grid.innerHTML = "";
+
+    galleryImages.forEach((image, index) => {
+      const item = document.createElement("div");
+      item.className = "gallery-item";
+      item.style.animationDelay = `${(index % INITIAL_COUNT) * 0.05}s`;
+
+      if (index >= INITIAL_COUNT) {
+        item.classList.add("hidden-item");
+      }
+
+      const img = document.createElement("img");
+      img.src = image.src;
+      img.alt = image.alt || "";
+      img.loading = "lazy";
+
+      item.appendChild(img);
+      grid.appendChild(item);
+    });
+
+    // Hide the toggle button entirely if there's nothing extra to show
+    toggleBtn.style.display = galleryImages.length > INITIAL_COUNT ? "flex" : "none";
+  }
+
+  toggleBtn.addEventListener("click", () => {
+    const expanded = toggleBtn.getAttribute("aria-expanded") === "true";
+    const hiddenItems = grid.querySelectorAll(".hidden-item");
+
+    if (!expanded) {
+      hiddenItems.forEach((item, i) => {
+        item.classList.remove("hidden-item");
+        item.style.animationDelay = `${i * 0.05}s`;
+        item.style.animation = "none";
+        item.offsetHeight; // reflow to restart animation
+        item.style.animation = "";
+      });
+      toggleLabel.textContent = "Show less";
+      toggleBtn.setAttribute("aria-expanded", "true");
+    } else {
+      grid.querySelectorAll(".gallery-item").forEach((item, i) => {
+        if (i >= INITIAL_COUNT) item.classList.add("hidden-item");
+      });
+      toggleLabel.textContent = "Show all";
+      toggleBtn.setAttribute("aria-expanded", "false");
+    }
+  });
+
+  renderGallery();
+</script>
+<!-- =================== END GALLERY SECTION =================== -->
